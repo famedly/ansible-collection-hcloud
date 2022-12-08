@@ -618,6 +618,12 @@ class AnsibleHCloudServer(AnsibleHCloud):
                     self.hcloud_server.update(labels=labels)
                 self._mark_as_changed()
 
+            name = self.module.params.get("name")
+            if self.module.params.get("id") is not None and name is not None and name != self.hcloud_server.name:
+                if not self.module.check_mode:
+                    self.hcloud_server.update(name=name)
+                self._mark_as_changed()
+
             wanted_firewalls = self.module.params.get("firewalls")
             if wanted_firewalls is not None:
                 # Removing existing but not wanted firewalls
