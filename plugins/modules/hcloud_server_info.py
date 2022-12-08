@@ -192,7 +192,7 @@ class AnsibleHCloudServerInfo(AnsibleHCloud):
             elif self.module.params.get("name") is not None:
                 self.hcloud_server_info = [self.client.servers.get_by_name(self.module.params.get("name"))]
             elif self.module.params.get("label_selector") is not None:
-                self.hcloud_server_info = self.client.servers.get_all(
+                (self.hcloud_server_info, meta) = self.client.servers.get_list(
                     label_selector=self.module.params.get("label_selector")
                 )
             else:
