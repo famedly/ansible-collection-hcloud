@@ -2,7 +2,7 @@ name: Lint
 
 on:
   push:
-    branches: [main, stable-1]
+    branches: [main, stable-1, patched]
   pull_request:
 
 jobs:
